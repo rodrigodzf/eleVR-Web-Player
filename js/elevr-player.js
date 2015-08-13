@@ -30,6 +30,37 @@ var timing = {showTiming: false, // Switch to true to show frame times in the co
 var videoObjectURL = null;
 var videoOptions = {};
 
+
+// WebMIDI Vars
+// ***************************************************************
+var bNewStart = false;
+var bStopped = false;
+var iDelay   = 0;      // we need 2 frames delay I dont know why
+var numFrames = 30 // frames per second
+
+var openPort = null;
+var allInputs = null;
+
+var kMTCFrames      = 0;
+var kMTCSeconds     = 1;
+var kMTCMinutes     = 2;
+var kMTCHours       = 3;
+
+//http://forum.openframeworks.cc/t/getting-midi-sync-message-song-how-to-solved/8667/4
+var tempoNumerator = 4; /// chose the one of your song...., ie. 4/4, 2/4 ..... the number in the numerator of the signature.
+var tempoDenominator = 4; /// choose the one you want...
+var tempoTicks = 0;
+var tempoqNotes = 1;
+var tempoBars = 1;
+var isPlaying = false;
+var num32thNotes = 0;
+var ticksfor32thNote = 0;
+
+// these static variables could be globals, or class properties etc.
+var times     = [0, 0, 0, 0];                 // this static buffer will hold our 4 time componens (frames, seconds, minutes, hours)
+var szType     = "24 fps";                           // SMPTE type as string (24fps, 25fps, 30fps drop-frame, 30fps)
+
+// ***************************************************************
 function initElements() {
   window.container = document.getElementById('video-container');
   window.container.style.width = window.innerWidth + 'px';
@@ -55,6 +86,7 @@ function initElements() {
   // Selectors
   window.videoSelect = document.getElementById('video-select');
   window.projectionSelect = document.getElementById('projection-select');
+  window.selector = document.getElementById("midi_input_device_select");
 
   document.getElementById('title-l').style.fontSize = window.outerHeight / 20 + 'px';
   document.getElementById('title-r').style.fontSize = window.outerHeight / 20 + 'px';
@@ -69,6 +101,7 @@ function runEleVRPlayer() {
   initElements();
   controls.create();
 
+  midiSync.initMidi();
   webGL.initWebGL();
 
   if (webGL.gl) {

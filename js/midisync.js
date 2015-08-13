@@ -110,37 +110,9 @@
     // -----------------------------------------------------------------------------
 
     var midiSync = {
+
+
         initMidi: function() {
-
-
-            // WebMIDI Vars
-            this.bNewStart = false;
-            this.bStopped = false;
-            this.iDelay   = 0;      // we need 2 frames delay I dont know why
-            this.numFrames = 30 // frames per second
-
-            this.openPort = null;
-            this.allInputs = null;
-
-            this.kMTCFrames      = 0;
-            this.kMTCSeconds     = 1;
-            this.kMTCMinutes     = 2;
-            this.kMTCHours       = 3;
-
-            //http://forum.openframeworks.cc/t/getting-midi-sync-message-song-how-to-solved/8667/4
-            this.tempoNumerator = 4; /// chose the one of your song...., ie. 4/4, 2/4 ..... the number in the numerator of the signature.
-            this.tempoDenominator = 4; /// choose the one you want...
-            this.tempoTicks = 0;
-            this.tempoqNotes = 1;
-            this.tempoBars = 1;
-            this.isPlaying = false;
-            this.num32thNotes = 0;
-            this.ticksfor32thNote = 0;
-
-            // these static variables could be globals, or class properties etc.
-            this.times     = [0, 0, 0, 0];                 // this static buffer will hold our 4 time componens (frames, seconds, minutes, hours)
-            this.szType     = "24 fps";                           // SMPTE type as string (24fps, 25fps, 30fps drop-frame, 30fps)
-
             navigator.requestMIDIAccess().then(function(info) {
                 selector.addEventListener('change', function(e) {
                     midiInputChanged(e.target.value);
@@ -241,7 +213,7 @@
             if (!bStopped){
                 var messageIndex        = MTCData[1] >> 4;       // the high nibble: which quarter message is this (0...7).
                 var val                 = MTCData[1] & 0xf;      // the low nibble: value
-                var timeIndex           = messageIndex  >> 1;              // which time component (frames, seconds, minutes or hours) is this
+                var timeIndex           = messageIndex  >> 1;              // which time component (frames, seconds, minutes or hours) is
                 var bNewFrame           = messageIndex % 4 == 0;
 
                 // the time encoded in the MTC is 1 frame behind by the time we have received a new frame, so adjust accordingly
