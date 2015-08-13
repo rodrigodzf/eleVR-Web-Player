@@ -1,7 +1,7 @@
 eleVR Web Player
 ================
 
-The eleVR player lets you watch 360 flat and stereo video on your Oculus Rift or Android device with VR headset (Cardboard, Durovis Dive, etc.) from a web browser. It is written with js, html5, and webGL. 
+The eleVR player lets you watch 360 flat and stereo video on your Oculus Rift or Android device with VR headset (Cardboard, Durovis Dive, etc.) from a web browser. It is written with js, html5, and webGL.
 
 eleVR Web Player works with the native browser support currently being implemented by [Firefox](http://blog.bitops.com/blog/2014/06/26/first-steps-for-vr-on-the-web/) and [Chromium](https://drive.google.com/folderview?id=0BzudLt22BqGRbW9WTHMtOWMzNjQ&usp=sharing#list). Please note that these experimental browsers may not have mp4 support.
 
@@ -9,7 +9,7 @@ The player depends on the open source libraries as noted in the [3rd Party Libra
 
 Videos shown in the player can be rotated using keyboard controls  (a/d, w/s, and q/e), as well as by the Oculus Rift if you are running an experimental webVR browser. You may be able to decrease video judder by setting your Oculus Display refresh rate to 60 Hz (the browser refreshes at 60 Hz and the slower mismatch can cause judder).
 
-#### [Go check out the demo!](http://hawksley.github.io/eleVR-Web-Player/) ####
+#### [Go check out the demo!](http://rodrigodzf.github.io/eleVR-Web-Player/) ####
 
 The following table documents the keyboard controls currently available.
 
@@ -74,7 +74,7 @@ data:text/html,<iframe id='i' src='http://localhost:8080' style='border: 0; posi
 
 ## Possible Issues and Resolutions ##
 ###Unable to play video###
-If you download and run the code yourself, you need to serve the content to localhost before you can view video (due to _cross origin issues_). 
+If you download and run the code yourself, you need to serve the content to localhost before you can view video (due to _cross origin issues_).
 
 Similarly, if you try to run your own video, you may run into __cross origin__ issues if your video is not at the same origin the player. Take a look at [this doc](https://developer.mozilla.org/en-US/docs/Web/WebGL/Cross-Domain_Textures) from mozilla if you run into these issues.
 
